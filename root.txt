@@ -85,7 +85,8 @@ printf("\nThe result is : %.2f\n", ans);
 //  ./a.out
 
 //OUTPUT:
-//Enter the postfix expression :AB+CD/EEnter the value of operand A : 12
+//Enter the postfix expression :AB+CD/E
+//Enter the value of operand A : 12
 //Enter the value of operand B : 2
 //Enter the value of operand C : 1
 //Enter the value of operand D : 15
