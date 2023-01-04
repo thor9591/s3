@@ -1,0 +1,93 @@
+
+//s3
+//.c
+#include <stdio.h>
+#define MAX 20
+typedef struct
+{
+int data[MAX];
+int top;
+} STACK;
+void initstack(STACK *ps)
+{
+ps->top = -1;
+}
+void push(STACK *ps, int num)
+{
+ps->data[++ps->top] = num;
+}
+int pop(STACK *ps)
+{
+return (ps->data[ps->top--]);
+}
+int isempty(STACK *ps)
+{
+return (ps->top == -1);
+}
+int isfull(STACK *ps)
+{
+return (ps->top == MAX - 1);
+}
+int evaluate(char post[20])
+{
+STACK s1;
+int value, i, opnd1, opnd2;
+initstack(&s1);
+for (i = 0; post[i] != '\0'; i++)
+{
+switch (post[i])
+{
+case '+':
+opnd2 = pop(&s1);
+opnd1 = pop(&s1);
+push(&s1, opnd1 + opnd2);
+break;
+case '-':
+opnd2 = pop(&s1);
+opnd1 = pop(&s1);
+push(&s1, opnd1 - opnd2);
+break;
+case '*':
+opnd2 = pop(&s1);
+opnd1 = pop(&s1);
+push(&s1, opnd1 * opnd2);
+break;
+case '/':
+opnd2 = pop(&s1);
+opnd1 = pop(&s1);
+push(&s1, opnd1 / opnd2);
+break;
+case '%':
+opnd2 = pop(&s1);
+opnd1 = pop(&s1);
+push(&s1, opnd1 % opnd2);
+break;
+default:
+printf("\nEnter the value of operand %c : ", post[i]);
+scanf("%d", &value);
+push(&s1, value);
+}
+}
+return pop(&s1);
+}
+void main()
+{
+char post[20];
+float ans;
+printf("\nEnter the postfix expression :");
+scanf("%s", post);
+ans = evaluate(post);
+printf("\nThe result is : %.2f\n", ans);
+}
+
+//cc filename.h
+//cc filename.c
+//  ./a.out
+
+//OUTPUT:
+//Enter the postfix expression :AB+CD/EEnter the value of operand A : 12
+//Enter the value of operand B : 2
+//Enter the value of operand C : 1
+//Enter the value of operand D : 15
+//Enter the value of operand E : 4
+//The result is : -4.00
